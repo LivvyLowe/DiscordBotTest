@@ -15,14 +15,12 @@ def degrees(tn, roll):
     
     d = math.floor((tn-roll)/10)
 
-    if tn < roll:
-        outcome = "failure"
-    else:
-        outcome = "success"
+    success = False
+    if roll <= tn:
+        success = True
 
     degrees = abs(d) + 1
-    
-    return outcome, degrees
+    return success, degrees
 
 def parse_math(math_str):
     try:

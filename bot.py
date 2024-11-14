@@ -20,21 +20,56 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 async def on_ready():
     print(f'{bot.user} has connected to Discord!')
 
-@bot.command(name='test')
-async def test(ctx, inputstr):
-    
-    tn = utils.parse_math(inputstr)
-    
-    die = utils.roll()
-    outcome, d = utils.degrees(tn, die)
-    
-    await ctx.reply(f'Target Number: {inputstr} →` {tn} `   \nDice Result: 1d100 → ` {die} ` \n {d} degrees of {outcome}!')
+@bot.event
+async def on_message(message):
+    # Avoid responding to the bot's own messages
+    if message.author == bot.user:
+        return
 
+    # Detect if the message starts with the word "test"
+    if message.content.lower().startswith("test"):
+        try:
+            # Extract the target number after the keyword "test"
+            content = message.content.lower().replace("test", "").strip()
+
+            #Converty content into target number
+            target_number = utils.parse_math(content)
+            roll = utils.roll() # Roll 1d100
+
+            # Calculate degrees of success or failure using the utility function
+            success, degrees = utils.degrees(target_number, roll)
+            
+            outcome_phrase = f"❌ Failed with ***{degrees} degrees of failure!*** ❌"
+            if success:
+                outcome_phrase = f"✅ Passed with ***{degrees} degrees of success!*** ✅"
+            
+
+            # Create an embed to display the result of the test roll
+            embed = discord.Embed(
+                title="🎲Test Roll🎲",
+                description=f"Rolling 1d100 against target number `{target_number}`",
+                color=0x1abc9c
+            )
+            embed.add_field(name="Target Number (TN)", value=f"{content} → `{target_number}`")
+            embed.add_field(name="Dice Result", value=str(roll), inline=False)
+            embed.add_field(name="Outcome", value=outcome_phrase, inline=False)
+            #embed.set_footer(text="The Emperor Protects!")
+
+            # Reply to the user's message with the embed
+            await message.reply(embed=embed, mention_author=True)
+
+        except Exception as e:
+            # If there's an error parsing the input, respond with an error message
+            await message.reply(f"Invalid test format! Please use something like 'test 75'. Error: {e}", mention_author=True)
+
+    # Allow the bot to continue processing other commands, if any are present
+    await bot.process_commands(message)
+    
 @bot.command(name='info')
 async def info(ctx):
-    embed = discord.Embed(title="Bot Information", description="A simple Discord bot", color=0x00ff00)
-    embed.add_field(name="Author", value="Your Name")
-    embed.add_field(name="Version", value="1.0")
+    embed = discord.Embed(title="Bot Information", description="A FFG test rolling bot by Livvy", color=0x00ff00)
+    embed.add_field(name="Author", value="Livvy")
+    embed.add_field(name="Version", value="0.5")
     await ctx.send(embed=embed)
 
 # Run the bot
