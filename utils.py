@@ -23,3 +23,16 @@ def degrees(tn, roll):
     degrees = abs(d) + 1
     
     return outcome, degrees
+
+def parse_math(math_str):
+    try:
+        # Check if the input can be directly converted to an integer
+        if math_str.isdigit():
+            return int(math_str)
+        
+        # Use eval to compute the result of the mathematical expression
+        result = eval(math_str)
+        # Return result as integer if it is a whole number, otherwise as a float
+        return int(result) if result.is_integer() else result
+    except (SyntaxError, ZeroDivisionError, NameError, TypeError, ValueError):
+        return "Invalid input"

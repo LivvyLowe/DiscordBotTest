@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 import discord
 from discord.ext import commands
 
-from utils import roll, is_admin, degrees
+import utils 
 
 # Load token from .env file
 load_dotenv()
@@ -21,13 +21,21 @@ async def on_ready():
     print(f'{bot.user} has connected to Discord!')
 
 @bot.command(name='test')
-async def test(ctx, tn):
+async def test(ctx, inputstr):
     
-    die = roll()
-    outcome, d = degrees(tn, die)
+    tn = utils.parse_math(inputstr)
     
-    await ctx.reply(f'Target Number: {tn} \nDice Result: {die} \n {d} degrees of {outcome}!')
+    die = utils.roll()
+    outcome, d = utils.degrees(tn, die)
     
+    await ctx.reply(f'Target Number: {inputstr} →` {tn} `   \nDice Result: 1d100 → ` {die} ` \n {d} degrees of {outcome}!')
+
+@bot.command(name='info')
+async def info(ctx):
+    embed = discord.Embed(title="Bot Information", description="A simple Discord bot", color=0x00ff00)
+    embed.add_field(name="Author", value="Your Name")
+    embed.add_field(name="Version", value="1.0")
+    await ctx.send(embed=embed)
 
 # Run the bot
 bot.run(TOKEN)
