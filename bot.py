@@ -3,6 +3,8 @@ from dotenv import load_dotenv
 import discord
 from discord.ext import commands
 
+from utils import roll, is_admin
+
 # Load token from .env file
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -18,9 +20,14 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 async def on_ready():
     print(f'{bot.user} has connected to Discord!')
 
-@bot.command(name='hello')
-async def hello(ctx):
-    await ctx.send('Hello! I am your bot!')
+@bot.command(name='test')
+async def test(ctx, tn):
+    
+    die = roll()
+    
+    
+    await ctx.send(f'{ctx.author.name} \n Dice Result: {die}')
+    
 
 # Run the bot
 bot.run(TOKEN)
