@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 import discord
 from discord.ext import commands
 
-from utils import roll, is_admin
+from utils import roll, is_admin, degrees
 
 # Load token from .env file
 load_dotenv()
@@ -24,9 +24,9 @@ async def on_ready():
 async def test(ctx, tn):
     
     die = roll()
+    outcome, d = degrees(tn, die)
     
-    
-    await ctx.send(f'{ctx.author.name} \n Dice Result: {die}')
+    await ctx.reply(f'Target Number: {tn} \nDice Result: {die} \n {d} degrees of {outcome}!')
     
 
 # Run the bot
