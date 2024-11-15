@@ -1,4 +1,5 @@
 import os
+import re
 from dotenv import load_dotenv
 import discord
 from discord.ext import commands
@@ -6,9 +7,8 @@ from discord.ext import commands
 import utils 
 
 #constants
-COMMAND_PREFIX = '!'
 RPG_TEST_WORD = 'test'
-
+OWNER_ID = 109626591377649664
 
 
 # Load token from .env file
@@ -20,7 +20,16 @@ intents = discord.Intents.default()
 intents.message_content = True  # Enable intents for reading message content
 
 # Create bot instance
-bot = commands.Bot(command_prefix=COMMAND_PREFIX, intents=intents)
+bot = commands.Bot(command_prefix=utils.DEFAULT_SETTINGS["command_prefix"], intents=intents)
+
+# Custom check to see if the user is either the bot owner or an administrator
+def is_owner_or_admin(ctx):
+    return ctx.author.id == OWNER_ID or ctx.author.guild_permissions.administrator
+
+@bot.event
+async def on_guild_join(guild):
+    # Initialize server settings when the bot joins a new server
+    utils.initialize_server_settings(guild.id)
 
 @bot.event
 async def on_ready():
@@ -32,6 +41,7 @@ async def on_message(message):
     if message.author == bot.user:
         return
 
+    server_id = message.guild.id
     # Detect if the message starts with the word "test"
     if message.content.lower().startswith(RPG_TEST_WORD):
         try:
@@ -45,21 +55,35 @@ async def on_message(message):
             # Calculate degrees of success or failure using the utility function
             success, degrees = utils.degrees(target_number, roll)
             
+            
+            ###         setting embed formatting & style
+             
+            # Load the custom bot color from server settings and convert it to a discord.Colour
+            bot_color_hex = utils.get_server_setting(server_id, "bot_color", utils.DEFAULT_SETTINGS["bot_color"])
+            bot_color = discord.Colour(int(bot_color_hex, 16))
+
             outcome_phrase = f"❌ Failed with ***{degrees} degrees of failure!*** ❌"
+            footer_text = utils.get_server_setting(server_id, "footer_failure", "")
             if success:
                 outcome_phrase = f"✅ Passed with ***{degrees} degrees of success!*** ✅"
+                footer_text = utils.get_server_setting(server_id, "footer_success", "")
+            
+            #getting embed title from server settings
+            embed_title = utils.get_server_setting(server_id, "embed_title", "🎲Test Roll🎲")
+            
+            
             
 
             # Create an embed to display the result of the test roll
             embed = discord.Embed(
-                title="🎲Test Roll🎲",
+                title=embed_title,
                 description=f"Rolling 1d100 against target number `{target_number}`",
-                color=0x1abc9c
+                color=bot_color
             )
             embed.add_field(name="Target Number (TN)", value=f"{content} → `{target_number}`")
             embed.add_field(name="Dice Result", value=str(roll), inline=False)
             embed.add_field(name="Outcome", value=outcome_phrase, inline=False)
-            embed.set_footer(text="The Emperor Protects!")
+            embed.set_footer(text=footer_text)
 
             # Reply to the user's message with the embed
             await message.reply(embed=embed, mention_author=True)
@@ -70,13 +94,52 @@ async def on_message(message):
 
     # Allow the bot to continue processing other commands, if any are present
     await bot.process_commands(message)
+
+@bot.command(name='settings')
+@commands.check(is_owner_or_admin)
+async def settings(ctx, setting_name: str = None, *, value: str = None):
+    """
+    Generalized command to update server settings.
+    Usage: !settings <setting_name> <value>
+    """
+    server_id = ctx.guild.id
+
+    # If no arguments are provided, list all available settings
+    if setting_name is None:
+        available_settings = ', '.join(utils.DEFAULT_SETTINGS.keys())
+        await ctx.send(f"Available settings: {available_settings}\n\nUsage: `!settings <setting_name> <value>`")
+        return
+
+    # Check if the setting name is valid
+    if setting_name not in utils.DEFAULT_SETTINGS:
+        await ctx.send(f"Invalid setting name `{setting_name}`. Available settings: {', '.join(utils.DEFAULT_SETTINGS.keys())}")
+        return
+
+    # Ensure a value is provided for the setting
+    if value is None:
+        await ctx.send(f"Please provide a value for `{setting_name}`.\n\nUsage: `!settings {setting_name} <value>`")
+        return
     
+   # If updating the bot_color setting, validate it
+    if setting_name == "bot_color":
+        # Ensure the color is a valid hexadecimal value
+        if not re.match(r'^0x[0-9a-fA-F]{6}$', value):
+            await ctx.send(f"Invalid color value `{value}`. Please provide a valid hex color code (e.g., 0x1abc9c).")
+            return
+    
+    # Update the server setting
+    utils.set_server_setting(server_id, setting_name, value)
+    await ctx.send(f"Setting `{setting_name}` updated to: `{value}`")
+
+
+
 @bot.command(name='info')
 async def info(ctx):
     embed = discord.Embed(title="Bot Information", description="A FFG test rolling bot by Livvy", color=0x00ff00)
     embed.add_field(name="Author", value="Livvy")
-    embed.add_field(name="Version", value="0.5.1")
+    embed.add_field(name="Version", value="0.6")
     await ctx.send(embed=embed)
+    
 
 # Run the bot
 bot.run(TOKEN)

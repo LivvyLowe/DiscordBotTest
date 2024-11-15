@@ -1,0 +1,17 @@
+{
+    "1207191873270186004": {
+        "bot_color": "0xfe15b0",
+        "embed_title": "title test",
+        "command_prefix": "!",
+        "footer_success": "Death to the False Emperor!",
+        "footer_failure": "The Laughter of Thirsting Gods!"
+    },
+    "1197234375880884387": {
+        "footer_success": "The Emperor protects!",
+        "footer_failure": "Death in service to the Emperor is its own reward. Life in failure to Him is its own condemnation."
+    },
+    "1103465124704047136": {
+        "footer_success": "Death to the False Emperor!",
+        "footer_failure": "The cruel laughter of thirsting gods!"
+    }
+}
