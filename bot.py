@@ -5,6 +5,12 @@ from discord.ext import commands
 
 import utils 
 
+#constants
+COMMAND_PREFIX = '!'
+RPG_TEST_WORD = 'test'
+
+
+
 # Load token from .env file
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -14,7 +20,7 @@ intents = discord.Intents.default()
 intents.message_content = True  # Enable intents for reading message content
 
 # Create bot instance
-bot = commands.Bot(command_prefix='!', intents=intents)
+bot = commands.Bot(command_prefix=COMMAND_PREFIX, intents=intents)
 
 @bot.event
 async def on_ready():
@@ -27,10 +33,10 @@ async def on_message(message):
         return
 
     # Detect if the message starts with the word "test"
-    if message.content.lower().startswith("test"):
+    if message.content.lower().startswith(RPG_TEST_WORD):
         try:
             # Extract the target number after the keyword "test"
-            content = message.content.lower().replace("test", "").strip()
+            content = message.content.lower().replace(RPG_TEST_WORD, "").strip()
 
             #Converty content into target number
             target_number = utils.parse_math(content)
@@ -53,7 +59,7 @@ async def on_message(message):
             embed.add_field(name="Target Number (TN)", value=f"{content} → `{target_number}`")
             embed.add_field(name="Dice Result", value=str(roll), inline=False)
             embed.add_field(name="Outcome", value=outcome_phrase, inline=False)
-            #embed.set_footer(text="The Emperor Protects!")
+            embed.set_footer(text="The Emperor Protects!")
 
             # Reply to the user's message with the embed
             await message.reply(embed=embed, mention_author=True)
@@ -69,7 +75,7 @@ async def on_message(message):
 async def info(ctx):
     embed = discord.Embed(title="Bot Information", description="A FFG test rolling bot by Livvy", color=0x00ff00)
     embed.add_field(name="Author", value="Livvy")
-    embed.add_field(name="Version", value="0.5")
+    embed.add_field(name="Version", value="0.5.1")
     await ctx.send(embed=embed)
 
 # Run the bot
