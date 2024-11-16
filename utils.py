@@ -2,11 +2,12 @@ import random
 import math
 import json
 import os
+import numpy as np
+from datetime import datetime
 
 
-
-def roll():
-    return random.randint(1,100)
+def roll(num_sides = 100):
+    return random.randint(1,num_sides)
 
 def is_admin(user):
     # Placeholder function for admin check
@@ -102,3 +103,94 @@ def initialize_all_servers(bot):
     settings = load_settings()
     for guild in bot.guilds:
         initialize_server_settings(guild.id)
+
+
+#Dice statistics variation
+
+from scipy.stats import chisquare
+import matplotlib.pyplot as plt
+
+# Generate a bar graph showing the distribution of rolls and calculate chi-square test
+def generate_randomness_graph(num_rolls=10000, num_sides=100):
+    # Step 1: Roll the dice `num_rolls` times
+    results = [random.randint(1, num_sides) for _ in range(num_rolls)]
+
+    # Step 2: Calculate frequencies of each result
+    frequencies = [results.count(i) for i in range(1, num_sides + 1)]
+
+    # Step 3: Calculate the expected frequency for each result
+    expected_frequency = num_rolls / num_sides
+
+    # Step 4: Perform chi-square goodness-of-fit test
+    chi_square_stat, p_value = chisquare(frequencies, f_exp=[expected_frequency] * num_sides)
+
+    # Step 5: Plot the frequencies
+    plt.figure(figsize=(10, 6))
+    plt.bar(range(1, num_sides + 1), frequencies, color='blue')
+    plt.xlabel('Roll Result')
+    plt.ylabel('Frequency')
+    plt.title(f'Distribution of {num_rolls} Rolls of a 1d{num_sides}')
+    plt.grid(axis='y', linestyle='--', linewidth=0.7)
+
+    # Step 6: Save the plot to a file
+    graph_file_path = "randomness_distribution.png"
+    plt.savefig(graph_file_path)
+    plt.close()
+
+    return graph_file_path, chi_square_stat, p_value
+
+# Add roll to server's roll history
+def add_roll_to_history(server_id, user, roll_result, target_number, success, degrees):
+    settings = load_settings()
+    server_settings = settings.setdefault(str(server_id), {})
+    roll_history = server_settings.setdefault("roll_history", [])
+
+    roll_details = {
+        "user": user,
+        "roll_result": roll_result,
+        "target_number": target_number,
+        "success": success,
+        "degrees": degrees,
+        "timestamp": datetime.now().isoformat()
+    }
+
+    roll_history.append(roll_details)
+
+    # Save updated settings back to the file
+    save_settings(settings)
+
+# Retrieve roll history for a specific server
+def get_roll_history(server_id):
+    settings = load_settings()
+    server_settings = settings.get(str(server_id), {})
+    return server_settings.get("roll_history", [])
+
+# Generate randomness graph and perform statistical analysis for roll history
+def generate_randomness_from_history(roll_results, num_sides=100):
+    # Step 1: Calculate frequencies of each result
+    frequencies = [roll_results.count(i) for i in range(1, num_sides + 1)]
+
+    # Step 2: Calculate the expected frequency for each result
+    num_rolls = len(roll_results)
+    expected_frequency = num_rolls / num_sides
+
+    # Step 3: Perform chi-square goodness-of-fit test
+    chi_square_stat, p_value = chisquare(frequencies, f_exp=[expected_frequency] * num_sides)
+
+    # Step 4: Calculate standard deviation of the roll results
+    std_dev = np.std(roll_results)
+
+    # Step 5: Plot the frequencies
+    plt.figure(figsize=(10, 6))
+    plt.bar(range(1, num_sides + 1), frequencies, color='blue')
+    plt.xlabel('Roll Result')
+    plt.ylabel('Frequency')
+    plt.title(f'Distribution of {num_rolls} Rolls of a 1d{num_sides}')
+    plt.grid(axis='y', linestyle='--', linewidth=0.7)
+
+    # Step 6: Save the plot to a file
+    graph_file_path = "roll_history_randomness.png"
+    plt.savefig(graph_file_path)
+    plt.close()
+
+    return graph_file_path, chi_square_stat, p_value, std_dev

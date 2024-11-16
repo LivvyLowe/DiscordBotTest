@@ -4,14 +4,389 @@
         "embed_title": "title test",
         "command_prefix": "!",
         "footer_success": "Death to the False Emperor!",
-        "footer_failure": "The Laughter of Thirsting Gods!"
+        "footer_failure": "The Laughter of Thirsting Gods!",
+        "roll_history": [
+            {
+                "user": "_liv",
+                "roll_result": 54,
+                "target_number": 5,
+                "success": false,
+                "degrees": 6,
+                "timestamp": "2024-11-15T21:25:45.334287"
+            },
+            {
+                "user": "_liv",
+                "roll_result": 46,
+                "target_number": 5,
+                "success": false,
+                "degrees": 6,
+                "timestamp": "2024-11-15T21:25:46.926395"
+            },
+            {
+                "user": "_liv",
+                "roll_result": 88,
+                "target_number": 5,
+                "success": false,
+                "degrees": 10,
+                "timestamp": "2024-11-15T21:25:48.265462"
+            },
+            {
+                "user": "_liv",
+                "roll_result": 76,
+                "target_number": 5,
+                "success": false,
+                "degrees": 9,
+                "timestamp": "2024-11-15T21:25:50.083838"
+            },
+            {
+                "user": "_liv",
+                "roll_result": 10,
+                "target_number": 5,
+                "success": false,
+                "degrees": 2,
+                "timestamp": "2024-11-15T21:25:52.034642"
+            },
+            {
+                "user": "_liv",
+                "roll_result": 39,
+                "target_number": 5,
+                "success": false,
+                "degrees": 5,
+                "timestamp": "2024-11-15T21:25:53.930099"
+            },
+            {
+                "user": "_liv",
+                "roll_result": 8,
+                "target_number": 6,
+                "success": false,
+                "degrees": 2,
+                "timestamp": "2024-11-15T21:25:55.263192"
+            },
+            {
+                "user": "_liv",
+                "roll_result": 69,
+                "target_number": 100,
+                "success": true,
+                "degrees": 4,
+                "timestamp": "2024-11-15T21:25:57.069487"
+            },
+            {
+                "user": "_liv",
+                "roll_result": 19,
+                "target_number": 90,
+                "success": true,
+                "degrees": 8,
+                "timestamp": "2024-11-15T21:25:58.550447"
+            },
+            {
+                "user": "_liv",
+                "roll_result": 78,
+                "target_number": 20,
+                "success": false,
+                "degrees": 7,
+                "timestamp": "2024-11-15T21:25:59.886261"
+            },
+            {
+                "user": "_liv",
+                "roll_result": 53,
+                "target_number": 20,
+                "success": false,
+                "degrees": 5,
+                "timestamp": "2024-11-15T21:27:18.185081"
+            },
+            {
+                "user": "_liv",
+                "roll_result": 95,
+                "target_number": 90,
+                "success": false,
+                "degrees": 2,
+                "timestamp": "2024-11-15T21:27:20.626304"
+            },
+            {
+                "user": "_liv",
+                "roll_result": 74,
+                "target_number": 90,
+                "success": true,
+                "degrees": 2,
+                "timestamp": "2024-11-15T21:27:21.893445"
+            },
+            {
+                "user": "_liv",
+                "roll_result": 38,
+                "target_number": 9,
+                "success": false,
+                "degrees": 4,
+                "timestamp": "2024-11-15T21:27:22.843153"
+            },
+            {
+                "user": "_liv",
+                "roll_result": 39,
+                "target_number": 90,
+                "success": true,
+                "degrees": 6,
+                "timestamp": "2024-11-15T21:27:24.967414"
+            },
+            {
+                "user": "_liv",
+                "roll_result": 97,
+                "target_number": 90,
+                "success": false,
+                "degrees": 2,
+                "timestamp": "2024-11-15T21:27:26.171847"
+            },
+            {
+                "user": "_liv",
+                "roll_result": 90,
+                "target_number": 90,
+                "success": true,
+                "degrees": 1,
+                "timestamp": "2024-11-15T21:27:27.309378"
+            },
+            {
+                "user": "_liv",
+                "roll_result": 36,
+                "target_number": 90,
+                "success": true,
+                "degrees": 6,
+                "timestamp": "2024-11-15T21:27:28.366117"
+            },
+            {
+                "user": "_liv",
+                "roll_result": 72,
+                "target_number": 90,
+                "success": true,
+                "degrees": 2,
+                "timestamp": "2024-11-15T21:27:29.813431"
+            },
+            {
+                "user": "_liv",
+                "roll_result": 63,
+                "target_number": 90,
+                "success": true,
+                "degrees": 3,
+                "timestamp": "2024-11-15T21:27:30.936163"
+            },
+            {
+                "user": "_liv",
+                "roll_result": 88,
+                "target_number": 90,
+                "success": true,
+                "degrees": 1,
+                "timestamp": "2024-11-15T21:27:32.057940"
+            },
+            {
+                "user": "_liv",
+                "roll_result": 55,
+                "target_number": 90,
+                "success": true,
+                "degrees": 4,
+                "timestamp": "2024-11-15T21:27:33.227470"
+            },
+            {
+                "user": "_liv",
+                "roll_result": 36,
+                "target_number": 90,
+                "success": true,
+                "degrees": 6,
+                "timestamp": "2024-11-15T21:27:34.377597"
+            },
+            {
+                "user": "_liv",
+                "roll_result": 47,
+                "target_number": 90,
+                "success": true,
+                "degrees": 5,
+                "timestamp": "2024-11-15T21:27:35.954283"
+            }
+        ]
     },
     "1197234375880884387": {
         "footer_success": "The Emperor protects!",
-        "footer_failure": "Death in service to the Emperor is its own reward. Life in failure to Him is its own condemnation."
+        "footer_failure": "*Those who scale the pinnacles of glory have the furthest to plunge into the abyss.*",
+        "bot_color": "0xff0000",
+        "embed_title": "\ud83c\udfb2The Emperor is watching...\ud83c\udfb2",
+        "roll_history": [
+            {
+                "user": "_liv",
+                "roll_result": 58,
+                "target_number": 75,
+                "success": true,
+                "degrees": 2,
+                "timestamp": "2024-11-15T21:13:21.158325"
+            },
+            {
+                "user": "_liv",
+                "roll_result": 34,
+                "target_number": 75,
+                "success": true,
+                "degrees": 5,
+                "timestamp": "2024-11-15T21:13:24.712179"
+            },
+            {
+                "user": "_liv",
+                "roll_result": 12,
+                "target_number": 75,
+                "success": true,
+                "degrees": 7,
+                "timestamp": "2024-11-15T21:13:27.016266"
+            },
+            {
+                "user": "_liv",
+                "roll_result": 54,
+                "target_number": 75,
+                "success": true,
+                "degrees": 3,
+                "timestamp": "2024-11-15T21:16:09.073264"
+            },
+            {
+                "user": "_liv",
+                "roll_result": 31,
+                "target_number": 75,
+                "success": true,
+                "degrees": 5,
+                "timestamp": "2024-11-15T21:16:12.098386"
+            },
+            {
+                "user": "_liv",
+                "roll_result": 87,
+                "target_number": 10,
+                "success": false,
+                "degrees": 9,
+                "timestamp": "2024-11-15T21:19:00.122705"
+            },
+            {
+                "user": "mooze19",
+                "roll_result": 6,
+                "target_number": 50,
+                "success": true,
+                "degrees": 5,
+                "timestamp": "2024-11-15T21:22:17.693450"
+            },
+            {
+                "user": "mooze19",
+                "roll_result": 55,
+                "target_number": 30,
+                "success": false,
+                "degrees": 4,
+                "timestamp": "2024-11-15T21:27:08.262909"
+            },
+            {
+                "user": "_liv",
+                "roll_result": 58,
+                "target_number": 90,
+                "success": true,
+                "degrees": 4,
+                "timestamp": "2024-11-15T21:29:34.268899"
+            },
+            {
+                "user": "_liv",
+                "roll_result": 19,
+                "target_number": 90,
+                "success": true,
+                "degrees": 8,
+                "timestamp": "2024-11-15T21:29:36.286102"
+            },
+            {
+                "user": "_liv",
+                "roll_result": 83,
+                "target_number": 90,
+                "success": true,
+                "degrees": 1,
+                "timestamp": "2024-11-15T21:29:37.343634"
+            },
+            {
+                "user": "_liv",
+                "roll_result": 59,
+                "target_number": 90,
+                "success": true,
+                "degrees": 4,
+                "timestamp": "2024-11-15T21:29:38.594143"
+            },
+            {
+                "user": "_liv",
+                "roll_result": 2,
+                "target_number": 20,
+                "success": true,
+                "degrees": 2,
+                "timestamp": "2024-11-15T21:30:12.041806"
+            },
+            {
+                "user": "_liv",
+                "roll_result": 17,
+                "target_number": 20,
+                "success": true,
+                "degrees": 1,
+                "timestamp": "2024-11-15T21:30:13.541848"
+            },
+            {
+                "user": "mooze19",
+                "roll_result": 32,
+                "target_number": 76,
+                "success": true,
+                "degrees": 5,
+                "timestamp": "2024-11-15T21:32:19.432226"
+            },
+            {
+                "user": "mooze19",
+                "roll_result": 65,
+                "target_number": 30,
+                "success": false,
+                "degrees": 5,
+                "timestamp": "2024-11-15T21:32:21.906061"
+            },
+            {
+                "user": "mooze19",
+                "roll_result": 77,
+                "target_number": 49,
+                "success": false,
+                "degrees": 4,
+                "timestamp": "2024-11-15T21:32:24.107278"
+            },
+            {
+                "user": "mooze19",
+                "roll_result": 50,
+                "target_number": 110,
+                "success": true,
+                "degrees": 7,
+                "timestamp": "2024-11-15T21:32:27.207843"
+            },
+            {
+                "user": "sparks7087",
+                "roll_result": 84,
+                "target_number": 20,
+                "success": false,
+                "degrees": 8,
+                "timestamp": "2024-11-15T21:32:28.705115"
+            },
+            {
+                "user": "mooze19",
+                "roll_result": 95,
+                "target_number": 50,
+                "success": false,
+                "degrees": 6,
+                "timestamp": "2024-11-15T21:32:44.419377"
+            },
+            {
+                "user": "mooze19",
+                "roll_result": 16,
+                "target_number": 20,
+                "success": true,
+                "degrees": 1,
+                "timestamp": "2024-11-15T21:32:47.550197"
+            },
+            {
+                "user": "sparks7087",
+                "roll_result": 7,
+                "target_number": 40,
+                "success": true,
+                "degrees": 4,
+                "timestamp": "2024-11-15T21:32:48.648543"
+            }
+        ]
     },
     "1103465124704047136": {
         "footer_success": "Death to the False Emperor!",
-        "footer_failure": "The cruel laughter of thirsting gods!"
+        "footer_failure": "The cruel laughter of thirsting gods!",
+        "embed_title": "<:undividedmoment:1202805460282114078> The Gods are Watching.... <:undividedmoment:1202805460282114078>"
     }
 }
