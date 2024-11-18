@@ -18,13 +18,13 @@ def degrees(tn, roll):
     tn = int(tn)
     roll = int(roll)
     
-    d = math.floor((tn-roll)/10)
-
-    success = False
     if roll <= tn:
+        degrees = 1 + (tn - roll) // 10
         success = True
-
-    degrees = abs(d) + 1
+    else:
+        degrees = 1 + (roll - tn) // 10
+        success = False
+    
     return success, degrees
 
 def parse_math(math_str):

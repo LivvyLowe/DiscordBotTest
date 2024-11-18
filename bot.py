@@ -251,7 +251,7 @@ async def history_randomness(ctx, user_query: str = None):
 async def info(ctx):
     embed = discord.Embed(title="Bot Information", description="A FFG test rolling bot by Livvy", color=0x00ff00)
     embed.add_field(name="Author", value="Livvy")
-    embed.add_field(name="Version", value="0.7")
+    embed.add_field(name="Version", value="0.7.1")
     await ctx.send(embed=embed)
 
 
