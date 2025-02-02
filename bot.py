@@ -247,6 +247,25 @@ async def history_randomness(ctx, user_query: str = None):
     else:
         await ctx.send("Sorry, an error occurred while generating the graph.")
 
+@bot.command(name='xp')
+async def sum_everyone(ctx):
+    total = 0
+    # This pattern matches "@everyone" followed by a number (including negative numbers and decimals)
+    pattern = r"^@everyone\s+(-?\d+\.?\d*)"
+
+    async for message in ctx.channel.history(limit=None):
+        match = re.match(pattern, message.content)
+        if match:
+            try:
+                number = float(match.group(1))  # Convert to float to handle decimals
+                total += number
+            except ValueError:
+                pass  # Skip if it's not a valid number
+
+    await ctx.send(f"XP sum: {total} xp")
+
+
+
 @bot.command(name='info')
 async def info(ctx):
     embed = discord.Embed(title="Bot Information", description="A FFG test rolling bot by Livvy", color=0x00ff00)
@@ -254,6 +273,20 @@ async def info(ctx):
     embed.add_field(name="Version", value="0.7.1")
     await ctx.send(embed=embed)
 
-
+@bot.command(name='degrees')
+@commands.check(is_owner_or_admin)
+async def degrees(ctx, tn: int, roll: int):
+    success, degrees = utils.degrees(tn, roll)
+    outcome_phrase = f"❌ Failed with ***{degrees} degrees of failure!*** ❌"
+    if success:
+        outcome_phrase = f"✅ Passed with ***{degrees} degrees of success!*** ✅"
+    
+    await   ctx.reply(outcome_phrase)
+    
+    
+    
 # Run the bot
 bot.run(TOKEN)
+
+
+    
